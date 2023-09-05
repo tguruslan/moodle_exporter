@@ -129,7 +129,7 @@ for archive in glob.glob("./**.mbz", recursive=True):
 
                         text = print_q(q, text)
 
-            with open('{}/{}.txt'.format(out_dir, child.find('title').text), 'w') as f:
+            with open('{}/{}.txt'.format(out_dir, child.find('title').text.replace('"','').replace("'","")), 'w', encoding="utf-8") as f:
                 f.write(text)
 
     text=''
@@ -137,7 +137,7 @@ for archive in glob.glob("./**.mbz", recursive=True):
         text = '{}\n{} {}\n'.format(text, q.find('name').text, clean_text(q.find('questiontext').text))
         text = print_q(q, text)
 
-    with open('{}/{}_all.txt'.format(out_dir, out_dir), 'w') as f:
+    with open('{}/{}_all.txt'.format(out_dir, out_dir), 'w', encoding="utf-8") as f:
                 f.write(text)
 
     shutil.rmtree('tmp')
